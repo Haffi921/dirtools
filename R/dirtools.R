@@ -19,14 +19,23 @@ get_path <- function() {
 		rstudioapi::getActiveDocumentContext()$path
 	}
 	else {
-		switch (Sys.info()[['sysname']],
-			Windows = shell("cd", intern = T),
-			Linux = ,
-			Darwin = {system("pwd", intern = T)},
-			{
-				stop("Could not determine operating system.",
-						 call. = FALSE)
-			}
-		)
+		if(!requireNamespace("here")) {
+			stop("Package \"here\" needed for this function to work in Terminal (Mac/Linux) and CMD (Windows)
+					 Please install it.",
+					 call. = FALSE)
+		}
+		else {
+			sub(".*=", "", commandArgs()[4])
+		}
 	}
 }
+
+# switch (Sys.info()[['sysname']],
+# 	Windows = shell("cd", intern = T),
+# 	Linux = ,
+# 	Darwin = sub(".*=", "", commandArgs()[4]),
+# 	{
+# 		stop("Could not determine operating system.",
+# 				 call. = FALSE)
+# 	}
+# )
