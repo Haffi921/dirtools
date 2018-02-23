@@ -16,7 +16,7 @@ get_path <- function() {
 					 call. = FALSE)
 		}
 
-		rstudioapi::getActiveDocumentContext()$path
+		dirname(rstudioapi::getActiveDocumentContext()$path)
 	}
 	else {
 		switch (Sys.info()[['sysname']],
