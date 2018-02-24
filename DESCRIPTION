@@ -6,8 +6,7 @@ Author@R: person("Hafsteinn", "Ragnarsson", email = "haffi921@gmail.com", role =
 Maintainer: The package maintainer <haffi@gmail.com>
 Description: 
 Depends: R (>= 3.4.3)
-Suggested:
-		rstudioapi (>= 0.7),
+Suggested: rstudioapi (>= 0.7),
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
