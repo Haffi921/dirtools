@@ -19,6 +19,7 @@ get_path <- function() {
 		print("isRStudio = TRUE")
 
 		if(rstudioapi::getActiveDocumentContext()$path == "") {
+			print("RStudio console")
 			switch (Sys.info()[['sysname']],
 				Windows = shell("cd", intern = T),
 				Linux = ,
@@ -28,18 +29,16 @@ get_path <- function() {
 							 call. = FALSE)
 				}
 			)
-			print("RStudio console")
 		}
 		else {
-			rstudioapi::getActiveDocumentContext()$path
 			print("RStudio script")
+			rstudioapi::getActiveDocumentContext()$path
 		}
 	}
 	else {
 		if(!interactive()) {
-			sub(".*=", "", commandArgs()[4])
-
 			print("Script")
+			sub(".*=", "", commandArgs()[4])
 		}
 		else {
 			if(!requireNamespace("here", quietly = TRUE)) {
@@ -47,9 +46,8 @@ get_path <- function() {
 						 Please install it.",
 						 call. = FALSE)
 			}
-			here::here()
-
 			print("Terminal/CMD Console")
+			here::here()
 		}
 	}
 }
