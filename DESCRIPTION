@@ -5,8 +5,7 @@ Version: 0.2.1
 Author@R: person("Hafsteinn", "Ragnarsson", email = "haffi921@gmail.com", role = c("aut", "cre"))
 Maintainer: The package maintainer <haffi@gmail.com>
 Description: 
-Depends: R (>= 3.4.3),
-    here (>= 0.1)
+Depends: R (>= 3.4.3)
 Suggested:
 		rstudioapi (>= 0.7),
 License: GPL-3

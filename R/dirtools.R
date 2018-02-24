@@ -16,10 +16,20 @@ get_path <- function() {
 					 call. = FALSE)
 		}
 
-		print("isRStudio = TRUE")
-
-		if(rstudioapi::getActiveDocumentContext()$path == "") {
-			print("RStudio console")
+		rstudioapi::getSourceEditorContext()$path
+	}
+	else {
+		# Script
+		if(!interactive()) {
+			sub(".*=", "", commandArgs()[4])
+		}
+		# Terminal/CMD Console
+		else {
+			if(!requireNamespace("here", quietly = TRUE)) {
+				stop("Package \"here\" needed for this function to work in Terminal (Mac/Linux) and CMD (Windows)
+						 Please install it.",
+						 call. = FALSE)
+			}
 			switch (Sys.info()[['sysname']],
 				Windows = shell("cd", intern = T),
 				Linux = ,
@@ -29,25 +39,6 @@ get_path <- function() {
 							 call. = FALSE)
 				}
 			)
-		}
-		else {
-			print("RStudio script")
-			rstudioapi::getActiveDocumentContext()$path
-		}
-	}
-	else {
-		if(!interactive()) {
-			print("Script")
-			sub(".*=", "", commandArgs()[4])
-		}
-		else {
-			if(!requireNamespace("here", quietly = TRUE)) {
-				stop("Package \"here\" needed for this function to work in Terminal (Mac/Linux) and CMD (Windows)
-						 Please install it.",
-						 call. = FALSE)
-			}
-			print("Terminal/CMD Console")
-			here::here()
 		}
 	}
 }
