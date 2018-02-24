@@ -25,11 +25,6 @@ get_path <- function() {
 		}
 		# Terminal/CMD Console
 		else {
-			if(!requireNamespace("here", quietly = TRUE)) {
-				stop("Package \"here\" needed for this function to work in Terminal (Mac/Linux) and CMD (Windows)
-						 Please install it.",
-						 call. = FALSE)
-			}
 			switch (Sys.info()[['sysname']],
 				Windows = shell("cd", intern = T),
 				Linux = ,
