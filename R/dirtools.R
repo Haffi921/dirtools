@@ -45,11 +45,8 @@ get_this_path <- function() {
 
 		try({
 			temp_path <- rstudioapi::getSourceEditorContext()$path
-			print("1 - Here?")
 			path <- dirname(temp_path)
-			print("2 - Here?")
 			filename <- basename(temp_path)
-			print("3 - Here?")
 		})
 	}
 	else if(!interactive()) {
@@ -57,9 +54,10 @@ get_this_path <- function() {
 		path <- dirname(temp_path)
 		filename <- basename(temp_path)
 	}
-
+	print("1 - Here?")
 	this_path$path <- path
+	print("2 - Here?")
 	this_path$filename <- filename
-
+	print("3 - Here?")
 	this_path
 }
