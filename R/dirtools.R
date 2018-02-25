@@ -46,13 +46,13 @@ get_this_path <- function() {
 						 	this_path$path <- getwd()
 						 	})
 
-		this_path$path <- dirname(path = path)
-		this_path$filename <- basename(path = path)
+		this_path$path <- dirname(path)
+		this_path$filename <- basename(path)
 	}
 	else if(!interactive()) {
 		path <- gsub("[~+~]+", " ", sub(".*=", "", commandArgs()[4]))
-		this_path$path <- dirname(path = path)
-		this_path$filename <- basename(path = path)
+		this_path$path <- dirname(path)
+		this_path$filename <- basename(path)
 	}
 	else {
 		this_path$path <- getwd()
