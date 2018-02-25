@@ -20,7 +20,7 @@ get_path <- function() {
 	else {
 		# Script
 		if(!interactive()) {
-			sub(".*=", "", commandArgs()[4])
+			gsub("[~+~]+", " ", sub(".*=", "", commandArgs()[4]))
 		}
 		# Terminal/CMD Console
 		else {
