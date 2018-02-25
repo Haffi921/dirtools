@@ -48,6 +48,7 @@ get_this_path <- function() {
 			path <- dirname(temp_path)
 			filename <- basename(temp_path)
 		})
+		print("RStudio")
 	}
 	else if(!interactive()) {
 		temp_path <- gsub("[~+~]+", " ", sub(".*=", "", commandArgs()[4]))
