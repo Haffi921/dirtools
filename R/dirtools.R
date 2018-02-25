@@ -25,7 +25,7 @@ get_path <- function() {
 		}
 		# Terminal/CMD Console
 		else {
-			writeLines("Console")
+			print("Console")
 			switch (Sys.info()[['sysname']],
 				Windows = shell("cd", intern = T),
 				Linux = ,
