@@ -41,7 +41,7 @@ get_this_path <- function() {
 					 call. = FALSE)
 		}
 
-		tryCatch(path <- rstudioapi::getSourceEditorContext()$path, error = function(e) {break()})
+		tryCatch(path <- rstudioapi::getSourceEditorContext()$path, error = function(e) {next()})
 
 		this_path$path <- dirname(path = path)
 		this_path$filename <- basename(path = path)
