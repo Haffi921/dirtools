@@ -32,6 +32,7 @@ get_path <- function() {
 get_this_path <- function() {
 	isRStudio <- Sys.getenv("RSTUDIO") == 1
 	this_path <- list("path" = "", "filename" = NA)
+	path <- ""
 
 	if(isRStudio) {
 		## This function needs the rStudioAPI package to run
@@ -41,22 +42,23 @@ get_this_path <- function() {
 					 call. = FALSE)
 		}
 
-		tryCatch(path <- rstudioapi::getSourceEditorContext()$path,
-						 error = function(e) {
-						 	this_path$path <- getwd()
-						 	})
-
-		this_path$path <- dirname(path)
-		this_path$filename <- basename(path)
+		tryCatch({
+			path <- dirname(rstudioapi::getSourceEditorContext()$path)
+			filename <- basename(rstudioapi::getSourceEditorContext()$path)
+			},
+			error = function(e) {path <- getwd()})
 	}
 	else if(!interactive()) {
 		path <- gsub("[~+~]+", " ", sub(".*=", "", commandArgs()[4]))
-		this_path$path <- dirname(path)
-		this_path$filename <- basename(path)
+		path <- dirname(path)
+		filename <- basename(path)
 	}
 	else {
-		this_path$path <- getwd()
+		path <- getwd()
 	}
+
+	this_path$path <- path
+	this_path$filename <- filename
 
 	this_path
 }
