@@ -44,14 +44,15 @@ get_this_path <- function() {
 		}
 
 		try({
-			path <- dirname(rstudioapi::getSourceEditorContext()$path)
-			filename <- basename(rstudioapi::getSourceEditorContext()$path)
+			temp_path <- rstudioapi::getSourceEditorContext()$path
+			path <- dirname(temp_path)
+			filename <- basename(temp_path)
 		})
 	}
 	else if(!interactive()) {
-		path <- gsub("[~+~]+", " ", sub(".*=", "", commandArgs()[4]))
-		path <- dirname(path)
-		filename <- basename(path)
+		temp_path <- gsub("[~+~]+", " ", sub(".*=", "", commandArgs()[4]))
+		path <- dirname(temp_path)
+		filename <- basename(temp_path)
 	}
 
 	this_path$path <- path
