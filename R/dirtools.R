@@ -15,10 +15,7 @@ get_path <- function() {
 					 Please install it.",
 					 call. = FALSE)
 		}
-
-		# tryCatch(rstudioapi::getSourceEditorContext()$path,
-		# 				 error = function(e) {getwd()})
-		rstudioapi::getSourceEditorContext()$path
+		tryCatch(rstudioapi::getSourceEditorContext()$path, error = function(e) {getwd()})
 	}
 	else {
 		# Script
@@ -27,16 +24,6 @@ get_path <- function() {
 		}
 		# Terminal/CMD Console
 		else {
-			# print("Console")
-			# switch (Sys.info()[['sysname']],
-			# 	Windows = shell("cd", intern = T),
-			# 	Linux = ,
-			# 	Darwin = {system("pwd", intern = T)},
-			# 	{
-			# 		stop("Could not determine operating system.",
-			# 				 call. = FALSE)
-			# 	}
-			# )
 			getwd()
 		}
 	}
