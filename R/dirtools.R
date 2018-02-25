@@ -16,7 +16,8 @@ get_path <- function() {
 					 call. = FALSE)
 		}
 
-		tryCatch(rstudioapi::getSourceEditorContext()$path, finally = getwd())
+		tryCatch(rstudioapi::getSourceEditorContext()$path,
+						 error = function(e) {getwd()})
 	}
 	else {
 		# Script
