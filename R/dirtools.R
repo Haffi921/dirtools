@@ -30,13 +30,10 @@ get_path <- function() {
 }
 
 get_this_path <- function() {
-	print("Not here 1")
 	isRStudio <- Sys.getenv("RSTUDIO") == 1
 	this_path <- list("path" = "", "filename" = NA)
 	path <- getwd()
 	filename <- NA
-
-	print("Not here 2")
 
 	if(isRStudio) {
 		## This function needs the rStudioAPI package to run
@@ -46,12 +43,13 @@ get_this_path <- function() {
 					 call. = FALSE)
 		}
 
-		print("Not here 3")
-
 		try({
 			temp_path <- rstudioapi::getSourceEditorContext()$path
+			print("1 - Here?")
 			path <- dirname(temp_path)
+			print("2 - Here?")
 			filename <- basename(temp_path)
+			print("3 - Here?")
 		})
 	}
 	else if(!interactive()) {
