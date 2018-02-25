@@ -29,7 +29,7 @@ get_path <- function() {
 	}
 }
 
-get_this_path() <- function() {
+get_this_path <- function() {
 	isRStudio <- Sys.getenv("RSTUDIO") == 1
 	this_path <- list("path" = "", "filename" = NA)
 
@@ -41,8 +41,7 @@ get_this_path() <- function() {
 					 call. = FALSE)
 		}
 
-		tryCatch(path <- rstudioapi::getSourceEditorContext()$path,
-						 error = function(e) {break()})
+		tryCatch(path <- rstudioapi::getSourceEditorContext()$path, error = function(e) {break()})
 
 		this_path$path <- dirname(path = path)
 		this_path$filename <- basename(path = path)
