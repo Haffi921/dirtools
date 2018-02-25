@@ -16,7 +16,7 @@ get_path <- function() {
 					 call. = FALSE)
 		}
 
-		try(rstudioapi::getSourceEditorContext()$path)
+		tryCatch(rstudioapi::getSourceEditorContext()$path, getwd())
 	}
 	else {
 		# Script
@@ -25,6 +25,7 @@ get_path <- function() {
 		}
 		# Terminal/CMD Console
 		else {
+			writeLines("Console")
 			switch (Sys.info()[['sysname']],
 				Windows = shell("cd", intern = T),
 				Linux = ,
