@@ -47,6 +47,7 @@ get_this_path <- function() {
 			temp_path <- rstudioapi::getSourceEditorContext()$path
 			path <- dirname(temp_path)
 			filename <- basename(temp_path)
+			print("Tried this")
 		})
 		print("RStudio")
 	}
