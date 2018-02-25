@@ -33,6 +33,7 @@ get_this_path <- function() {
 	isRStudio <- Sys.getenv("RSTUDIO") == 1
 	this_path <- list("path" = "", "filename" = NA)
 	path <- ""
+	filename <- NA
 
 	if(isRStudio) {
 		## This function needs the rStudioAPI package to run
