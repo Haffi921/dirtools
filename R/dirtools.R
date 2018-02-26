@@ -43,6 +43,7 @@ get_this_path <- function() {
 		if(dirname(path) == ".") {
 			path <- paste(getwd(), basename(path), sep = "/")
 		}
+		path
 
 		dir <- dirname(path)
 		filename <- basename(path)
@@ -53,6 +54,23 @@ get_this_path <- function() {
 
 	this_path
 }
+
+# path <- gsub("[~+~]+", " ", sub(".*=", "", commandArgs()[4]))
+#
+# paste("Is dirname(path) == '.':", dirname(path) == ".")
+# paste("getwd() =", getwd())
+# paste(getwd(), basename(path), sep = "/")
+# if(dirname(path) == ".") {
+# 	path <- paste(getwd(), basename(path), sep = "/")
+# }
+#
+# dir <- dirname(path)
+# filename <- basename(path)
+# paste("getwd() =", getwd())
+# path
+# dir
+# setwd(dir)
+# paste("getwd() =", getwd())
 
 get_this_dir <- function() {
 	dir <- get_this_path()$dir
