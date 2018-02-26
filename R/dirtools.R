@@ -50,13 +50,22 @@ get_this_path <- function() {
 	this_path
 }
 
+get_this_dir <- function() {
+	dir <- get_this_path()$path
+
+	if(dir == "") {
+		stop("Directory not found.", call. = FALSE)
+	}
+
+	dir
+}
+
 get_this_filename <- function() {
 	filename <- get_this_path()$filename
 
 	if(is.na(filename)) {
 		stop("This is not a file.", call. = FALSE)
 	}
-	else {
-		filename
-	}
+
+	filename
 }

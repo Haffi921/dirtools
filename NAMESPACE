@@ -1,4 +1,5 @@
 exportPattern("^[[:alpha:]]+")
 
 export(get_this_path)
+export(get_this_dir)
 export(get_this_filename)
