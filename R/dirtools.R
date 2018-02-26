@@ -3,12 +3,12 @@
 #' @keywords get working directory active document path
 
 get_this_path <- function() {
-	this_path <- list("path" = "", "filename" = NA)
+	this_path <- list("dir" = "", "filename" = NA)
 
 	## If function is called in a Terminal/CMD console
 	## or in RStudio console with no open document,
 	## path defaults to current working directory
-	path <- getwd()
+	dir <- getwd()
 	filename <- NA
 
 	isRStudio <- Sys.getenv("RSTUDIO") == 1
@@ -27,10 +27,10 @@ get_this_path <- function() {
 		## If a document is open in RStudio this runs
 		try({
 			# Path of current open document or script that function is called in
-			temp_path <- rstudioapi::getSourceEditorContext()$path
+			path <- rstudioapi::getSourceEditorContext()$path
 
-			path <- dirname(temp_path)
-			filename <- basename(temp_path)
+			dir <- dirname(path)
+			filename <- basename(path)
 			},
 			silent = TRUE
 		)
@@ -38,20 +38,20 @@ get_this_path <- function() {
 	## Check if this is a script
 	else if(!interactive()) {
 		# Path of current script
-		temp_path <- gsub("[~+~]+", " ", sub(".*=", "", commandArgs()[4]))
+		path <- gsub("[~+~]+", " ", sub(".*=", "", commandArgs()[4]))
 
-		path <- dirname(temp_path)
-		filename <- basename(temp_path)
+		dir <- dirname(path)
+		filename <- basename(path)
 	}
 
-	this_path$path <- path
+	this_path$dir <- dir
 	this_path$filename <- filename
 
 	this_path
 }
 
 get_this_dir <- function() {
-	dir <- get_this_path()$path
+	dir <- get_this_path()$dir
 
 	if(dir == "") {
 		stop("Directory not found.", call. = FALSE)
