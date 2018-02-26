@@ -41,7 +41,7 @@ get_this_path <- function() {
 		path <- gsub("[~+~]+", " ", sub(".*=", "", commandArgs()[4]))
 
 		if(dirname(path) == ".") {
-			paste(getwd(), basename(path), sep = "/")
+			path <- paste(getwd(), basename(path), sep = "/")
 		}
 
 		dir <- dirname(path)
