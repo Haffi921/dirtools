@@ -31,6 +31,7 @@ get_path <- function() {
 
 get_this_path <- function() {
 	isRStudio <- Sys.getenv("RSTUDIO") == 1
+
 	this_path <- list("path" = "", "filename" = NA)
 	path <- getwd()
 	filename <- NA
@@ -47,17 +48,16 @@ get_this_path <- function() {
 			temp_path <- rstudioapi::getSourceEditorContext()$path
 			path <- dirname(temp_path)
 			filename <- basename(temp_path)
-		})
+		}, silent = TRUE)
 	}
 	else if(!interactive()) {
 		temp_path <- gsub("[~+~]+", " ", sub(".*=", "", commandArgs()[4]))
 		path <- dirname(temp_path)
 		filename <- basename(temp_path)
 	}
-	print("1 - Here?")
+
 	this_path$path <- path
-	print("2 - Here?")
 	this_path$filename <- filename
-	print("3 - Here?")
+
 	this_path
 }
