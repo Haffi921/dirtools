@@ -38,7 +38,11 @@ get_this_path <- function() {
 	## Check if this is a script
 	else if(!interactive()) {
 		# Path of current script
-		path <- paste(getwd(), gsub("[~+~]+", " ", sub(".*=", "", commandArgs()[4])), sep = "/")
+		path <- gsub("[~+~]+", " ", sub(".*=", "", commandArgs()[4]))
+
+		if(dirname(path) == ".") {
+			paste(getwd(), basename(path), sep = "/")
+		}
 
 		dir <- dirname(path)
 		filename <- basename(path)
