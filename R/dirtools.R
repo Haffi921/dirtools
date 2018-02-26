@@ -54,7 +54,7 @@ get_this_filename <- function() {
 	filename <- get_this_path()$filename
 
 	if(is.na(filename)) {
-		stop("Error: This is not a file.", call. = FALSE)
+		stop("This is not a file.", call. = FALSE)
 	}
 	else {
 		filename
