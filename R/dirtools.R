@@ -38,29 +38,20 @@ get_this_path <- function() {
 	## Check if this is a script
 	else if(!interactive()) {
 		# Path of current console
-		cmd <- switch(Sys.info()[['sysname']],
-									Windows = shell("cd", intern = T),
-									Linux = ,
-									Darwin = system("pwd", intern = T),
-									{
-										stop("Could not determine ")
-									}
-		)
-		print(cmd)
-		print(getwd())
-		print(cmd == getwd())
+		wd <- getwd()
+		print(wd)
 
 		# Path of current script from console
-		path_from_cmd <- gsub("[~+~]+", " ", sub(".*=", "", commandArgs()[4]))
-		print(path_from_cmd)
+		path_from_wd <- gsub("[~+~]+", " ", sub(".*=", "", commandArgs()[4]))
+		print(path_from_wd)
 
 
-		if(substr(path_from_cmd, 1, nchar(cmd)) != cmd && cmd != "/") {
-			path <- paste(cmd, path_from_cmd, sep = "/")
-		} else if(substr(path_from_cmd, 1, nchar(cmd)) != cmd) {
-			path <- paste(cmd, path_from_cmd, sep = "")
+		if(substr(path_from_wd, 1, nchar(wd)) != wd && wd != "/") {
+			path <- paste(wd, path_from_wd, sep = "/")
+		} else if(substr(path_from_wd, 1, nchar(wd)) != wd) {
+			path <- paste(wd, path_from_wd, sep = "")
 		} else {
-			path <- path_from_cmd
+			path <- path_from_wd
 		}
 
 		print(path)
