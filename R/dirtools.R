@@ -59,7 +59,7 @@ get_this_path <- function() {
 			path <- path_from_cmd
 		}
 
-		path <- normalizePath(path)
+		path <- normalizePath(path, winslash = "/")
 
 		dir <- dirname(path)
 		filename <- basename(path)
