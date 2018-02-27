@@ -27,7 +27,7 @@ get_this_path <- function() {
 		## If a document is open in RStudio this runs
 		try({
 			# Path of current open document or script that function is called in
-			path <- rstudioapi::getSourceEditorContext()$path
+			path <- path.expand(rstudioapi::getSourceEditorContext()$path)
 
 			dir <- dirname(path)
 			filename <- basename(path)
@@ -38,21 +38,14 @@ get_this_path <- function() {
 	## Check if this is a script
 	else if(!interactive()) {
 		# Path of current script
-		filepath <- sub(".*/", "", gsub("[~+~]+", " ", sub(".*=", "", commandArgs()[4])))
+		path <- gsub("[~+~]+", " ", sub(".*=", "", commandArgs()[4]))
+		nchar_of_wd <- nchar(getwd())
+		possible_homepath <- substr(path, 1, nchar_of_wd)
 
-		shellDir <- switch( Sys.info()[['sysname']],
-												Windows = shell("cd", intern = T),
-												Linux = ,
-												Darwin = system("pwd", intern = T),
-												stop("Could not determine operating system.", call. = FALSE)
-		)
 
-		path <- paste(shellDir, filepath, sep = "/")
-
-		# if(dirname(path) == ".") {
-		# 	path <- paste(getwd(), basename(path), sep = "/")
-		# }
-		# path
+		if(getwd() != possible_homepath) {
+			path <- paste(getwd(), path, sep = "/")
+		}
 
 		dir <- dirname(path)
 		filename <- basename(path)
