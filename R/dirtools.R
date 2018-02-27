@@ -37,15 +37,29 @@ get_this_path <- function() {
 	}
 	## Check if this is a script
 	else if(!interactive()) {
-		# Path of current script
-		path <- gsub("[~+~]+", " ", sub(".*=", "", commandArgs()[4]))
-		nchar_of_wd <- nchar(sub(" ", "",getwd()))
-		possible_homepath <- substr(sub(" ", "", path), 1, nchar_of_wd)
+		# Path of current console
+		cmd <- switch(Sys.info()[['sysname']],
+									Windows = shell("cd", intern = T),
+									Linux = ,
+									Darwin = system("pwd", intern = T),
+									{
+										stop("Could not determine ")
+									}
+		)
+
+		# Path of current script from console
+		path_from_cmd <- gsub("[~+~]+", " ", sub(".*=", "", commandArgs()[4]))
 
 
-		if(getwd() != possible_homepath) {
-			path <- paste(getwd(), path, sep = "/")
+		if(substr(path_from_cmd, 1, nchar(cmd)) != cmd && cmd != "/") {
+			path <- paste(cmd, path_from_cmd, sep = "/")
+		} else if(substr(path_from_cmd, 1, nchar(cmd)) != cmd) {
+			path <- paste(cmd, path_from_cmd, sep = "")
+		} else {
+			path <- path_from_cmd
 		}
+
+		path <- normalizePath(path)
 
 		dir <- dirname(path)
 		filename <- basename(path)
