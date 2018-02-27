@@ -38,12 +38,21 @@ get_this_path <- function() {
 	## Check if this is a script
 	else if(!interactive()) {
 		# Path of current script
-		path <- gsub("[~+~]+", " ", sub(".*=", "", commandArgs()[4]))
+		filepath <- sub(".*/", "", gsub("[~+~]+", " ", sub(".*=", "", commandArgs()[4])))
 
-		if(dirname(path) == ".") {
-			path <- paste(getwd(), basename(path), sep = "/")
-		}
-		path
+		shellDir <- switch( Sys.info()[['sysname']],
+												Windows = shell("cd", intern = T),
+												Linux = ,
+												Darwin = system("pwd", intern = T),
+												stop("Could not determine operating system.", call. = FALSE)
+		)
+
+		path <- paste(shellDir, filepath, sep = "/")
+
+		# if(dirname(path) == ".") {
+		# 	path <- paste(getwd(), basename(path), sep = "/")
+		# }
+		# path
 
 		dir <- dirname(path)
 		filename <- basename(path)
