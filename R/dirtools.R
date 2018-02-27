@@ -46,9 +46,11 @@ get_this_path <- function() {
 										stop("Could not determine ")
 									}
 		)
+		print(cmd)
 
 		# Path of current script from console
 		path_from_cmd <- gsub("[~+~]+", " ", sub(".*=", "", commandArgs()[4]))
+		print(path_from_cmd)
 
 
 		if(substr(path_from_cmd, 1, nchar(cmd)) != cmd && cmd != "/") {
@@ -58,6 +60,8 @@ get_this_path <- function() {
 		} else {
 			path <- path_from_cmd
 		}
+
+		print(path)
 
 		path <- normalizePath(path, winslash = "/")
 
