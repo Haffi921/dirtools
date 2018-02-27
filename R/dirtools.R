@@ -39,8 +39,8 @@ get_this_path <- function() {
 	else if(!interactive()) {
 		# Path of current script
 		path <- gsub("[~+~]+", " ", sub(".*=", "", commandArgs()[4]))
-		nchar_of_wd <- nchar(getwd())
-		possible_homepath <- substr(path, 1, nchar_of_wd)
+		nchar_of_wd <- nchar(sub(" ", "",getwd()))
+		possible_homepath <- substr(sub(" ", "", path), 1, nchar_of_wd)
 
 
 		if(getwd() != possible_homepath) {
