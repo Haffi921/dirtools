@@ -2,10 +2,9 @@
 #'
 #' @keywords get working directory active document path
 
-.onLoad <- function(libname, pkgname) {
-	assign("dirtoolsEnvironment", new.env(), parent.env())
-	dirtoolsEnvironment$path_to_file <- try(normalizePath(gsub("[~+~]+", " ", sub(".*=", "", commandArgs()[4])), winslash = "/"))
-}
+
+dirtoolsEnvironment <- new.env()
+dirtoolsEnvironment$path_to_file <- try(normalizePath(gsub("[~+~]+", " ", sub(".*=", "", commandArgs()[4])), winslash = "/"))
 
 get_this_path <- function() {
 	this_path <- list("dir" = "", "filename" = NA)
