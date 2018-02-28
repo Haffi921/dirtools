@@ -2,8 +2,10 @@
 #'
 #' @keywords get working directory active document path
 
-
-dirtoolsEnvironment <- new.env()
+## If this is a script create environment to hold a dependable path to file
+if(!interactive()) {
+	dirtoolsEnv <- new.env()
+}
 
 get_this_path <- function() {
 	this_path <- list("dir" = "", "filename" = NA)
@@ -40,42 +42,13 @@ get_this_path <- function() {
 	}
 	## Check if this is a script
 	else if(!interactive()) {
-		# if(!requireNamespace("stringi", quietly = TRUE)) {
-		# 	stop("Package \"stringi\" needed for this function to work in a script
-		# 			 Please install it.",
-		# 			 call. = FALSE)
-		# }
-		# # Path of current console
-		# wd <- getwd()
-		#
-		# # Path of current script from console
-		# path_from_wd <- gsub("[~+~]+", " ", sub(".*=", "", commandArgs()[4]))
-		#
-		# if(stringi::stri_cmp_equiv(wd, dirname(path_from_wd))) {
-		# 	this_path$dir <- wd
-		# 	this_path$filename <- basename(path_from_wd)
-		# 	return(this_path)
-		# }
-		#
-		# if(substr(path_from_wd, 1, nchar(wd)) != wd && wd != "/") {
-		# 	path <- paste(wd, path_from_wd, sep = .Platform$file.sep)
-		# } else if(substr(path_from_wd, 1, nchar(wd)) != wd) {
-		# 	path <- paste(wd, path_from_wd, sep = "")
-		# } else {
-		# 	path <- path_from_wd
-		# }
-		#
-		# path <- normalizePath(path, winslash = "/")
-		#
-		# if(!(basename(path) %in% list.files(dirname(path)))) {
-		# 	stop()
-		# }
-
-		if(!exists("path_to_file", where = dirtoolsEnvironment, inherits = FALSE)) {
-			dirtoolsEnvironment$path_to_file <- try(normalizePath(gsub("[~+~]+", " ", sub(".*=", "", commandArgs()[4])), winslash = "/"))
+		## When script first runs a this function then create a dependable path to file
+		if(!exists("path_to_file", where = dirtoolsEnv, inherits = FALSE)) {
+			dirtoolsEnv$path_to_file <- try(normalizePath(gsub("[~+~]+", " ", sub(".*=", "", commandArgs()[4])), winslash = "/"))
 		}
 
-		path <- dirtoolsEnvironment$path_to_file
+		## Get the dependable path to file
+		path <- dirtoolsEnv$path_to_file
 
 		dir <- dirname(path)
 		filename <- basename(path)
@@ -108,5 +81,5 @@ get_this_filename <- function() {
 }
 
 .onUnload <- function(libpath) {
-	rm(dirtoolsEnvironment$path_to_file)
+	rm(dirtoolsEnv)
 }

@@ -1,14 +1,13 @@
 Package: dirtools
 Type: Package
 Title: Tools for directory management
-Version: 0.3.2
+Version: 0.4
 Author@R: person("Hafsteinn", "Ragnarsson", email = "haffi921@gmail.com", role = c("aut", "cre"))
 Maintainer: The package maintainer <haffi921@gmail.com>
 Description: Tools for directory management
 Depends: R (>= 3.4.3)
 Suggested:
-	rstudioapi (>= 0.7),
-	stringi (>= 1.1.6)
+	rstudioapi (>= 0.7)
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
