@@ -2,7 +2,7 @@
 #'
 #' @keywords get working directory active document path
 
-.onLoad <- function(libname, pkgname) {
+.onAttach <- function(libname, pkgname) {
 	path_to_file <- normalizePath(gsub("[~+~]+", " ", sub(".*=", "", commandArgs()[4])), winslash = "/")
 }
 
