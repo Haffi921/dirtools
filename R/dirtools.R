@@ -52,6 +52,7 @@ get_this_path <- function() {
 			print("True")
 			this_path$dir <- wd
 			this_path$filename <- basename(path_from_wd)
+			return(this_path)
 		}
 
 		if(substr(path_from_wd, 1, nchar(wd)) != wd && wd != "/") {
