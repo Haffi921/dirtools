@@ -49,6 +49,7 @@ get_this_path <- function() {
 		path_from_wd <- gsub("[~+~]+", " ", sub(".*=", "", commandArgs()[4]))
 
 		if(stringi::stri_cmp_equiv(wd, dirname(path_from_wd))) {
+			print("True")
 			this_path$dir <- wd
 			this_path$filename <- basename(path_from_wd)
 		}

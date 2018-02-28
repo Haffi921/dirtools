@@ -6,7 +6,9 @@ Author@R: person("Hafsteinn", "Ragnarsson", email = "haffi921@gmail.com", role =
 Maintainer: The package maintainer <haffi921@gmail.com>
 Description: Tools for directory management
 Depends: R (>= 3.4.3)
-Suggested: rstudioapi (>= 0.7)
+Suggested:
+	rstudioapi (>= 0.7),
+	stringi (>= 1.1.6)
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
