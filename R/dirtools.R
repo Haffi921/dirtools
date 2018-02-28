@@ -2,6 +2,10 @@
 #'
 #' @keywords get working directory active document path
 
+.onLoad <- function() {
+	path_to_file <- normalizePath(gsub("[~+~]+", " ", sub(".*=", "", commandArgs()[4])), winslash = "/")
+}
+
 get_this_path <- function() {
 	this_path <- list("dir" = "", "filename" = NA)
 
@@ -68,7 +72,7 @@ get_this_path <- function() {
 		# 	stop()
 		# }
 
-		path <- normalizePath(gsub("[~+~]+", " ", sub(".*=", "", commandArgs()[4])), winslash = "/")
+		path <- path_to_file
 
 		dir <- dirname(path)
 		filename <- basename(path)
@@ -98,4 +102,8 @@ get_this_filename <- function() {
 	}
 
 	filename
+}
+
+.onUnload <- function() {
+	rm(path_to_file)
 }
