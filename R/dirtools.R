@@ -72,7 +72,7 @@ get_this_path <- function() {
 		# 	stop()
 		# }
 
-		path <- path_to_file
+		path <- dirtoolsEnvironment$path_to_file
 
 		dir <- dirname(path)
 		filename <- basename(path)
