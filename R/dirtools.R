@@ -44,7 +44,7 @@ get_this_path <- function() {
 		path_from_wd <- gsub("[~+~]+", " ", sub(".*=", "", commandArgs()[4]))
 
 		if(substr(path_from_wd, 1, nchar(wd)) != wd && wd != "/") {
-			path <- paste(wd, path_from_wd, sep = "/")
+			path <- paste(wd, path_from_wd, sep = .Platform$file.sep)
 		} else if(substr(path_from_wd, 1, nchar(wd)) != wd) {
 			path <- paste(wd, path_from_wd, sep = "")
 		} else {
@@ -52,6 +52,10 @@ get_this_path <- function() {
 		}
 
 		path <- normalizePath(path, winslash = "/")
+
+		if(!(basename(path) %in% list.files(dirname(path)))) {
+			stop()
+		}
 
 		dir <- dirname(path)
 		filename <- basename(path)
