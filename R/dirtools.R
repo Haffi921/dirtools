@@ -37,36 +37,38 @@ get_this_path <- function() {
 	}
 	## Check if this is a script
 	else if(!interactive()) {
-		if(!requireNamespace("stringi", quietly = TRUE)) {
-			stop("Package \"stringi\" needed for this function to work in a script
-					 Please install it.",
-					 call. = FALSE)
-		}
-		# Path of current console
-		wd <- getwd()
+		# if(!requireNamespace("stringi", quietly = TRUE)) {
+		# 	stop("Package \"stringi\" needed for this function to work in a script
+		# 			 Please install it.",
+		# 			 call. = FALSE)
+		# }
+		# # Path of current console
+		# wd <- getwd()
+		#
+		# # Path of current script from console
+		# path_from_wd <- gsub("[~+~]+", " ", sub(".*=", "", commandArgs()[4]))
+		#
+		# if(stringi::stri_cmp_equiv(wd, dirname(path_from_wd))) {
+		# 	this_path$dir <- wd
+		# 	this_path$filename <- basename(path_from_wd)
+		# 	return(this_path)
+		# }
+		#
+		# if(substr(path_from_wd, 1, nchar(wd)) != wd && wd != "/") {
+		# 	path <- paste(wd, path_from_wd, sep = .Platform$file.sep)
+		# } else if(substr(path_from_wd, 1, nchar(wd)) != wd) {
+		# 	path <- paste(wd, path_from_wd, sep = "")
+		# } else {
+		# 	path <- path_from_wd
+		# }
+		#
+		# path <- normalizePath(path, winslash = "/")
+		#
+		# if(!(basename(path) %in% list.files(dirname(path)))) {
+		# 	stop()
+		# }
 
-		# Path of current script from console
-		path_from_wd <- gsub("[~+~]+", " ", sub(".*=", "", commandArgs()[4]))
-
-		if(stringi::stri_cmp_equiv(wd, dirname(path_from_wd))) {
-			this_path$dir <- wd
-			this_path$filename <- basename(path_from_wd)
-			return(this_path)
-		}
-
-		if(substr(path_from_wd, 1, nchar(wd)) != wd && wd != "/") {
-			path <- paste(wd, path_from_wd, sep = .Platform$file.sep)
-		} else if(substr(path_from_wd, 1, nchar(wd)) != wd) {
-			path <- paste(wd, path_from_wd, sep = "")
-		} else {
-			path <- path_from_wd
-		}
-
-		path <- normalizePath(path, winslash = "/")
-
-		if(!(basename(path) %in% list.files(dirname(path)))) {
-			stop()
-		}
+		path <- normalizePath(gsub("[~+~]+", " ", sub(".*=", "", commandArgs()[4])), winslash = "/")
 
 		dir <- dirname(path)
 		filename <- basename(path)
