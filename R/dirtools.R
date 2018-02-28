@@ -71,7 +71,7 @@ get_this_path <- function() {
 		# 	stop()
 		# }
 
-		if(!exists(dirtoolsEnvironment$path_to_file)) {
+		if(!exists("path_to_file", where = dirtoolsEnvironment, inherits = FALSE)) {
 			dirtoolsEnvironment$path_to_file <- try(normalizePath(gsub("[~+~]+", " ", sub(".*=", "", commandArgs()[4])), winslash = "/"))
 		}
 
