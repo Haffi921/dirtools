@@ -43,9 +43,8 @@ get_this_path <- function() {
 		# Path of current script from console
 		path_from_wd <- gsub("[~+~]+", " ", sub(".*=", "", commandArgs()[4]))
 
-		if(wd == dirname(path_from_wd)) {
-			return(path_from_wd)
-		}
+		substr(path_from_wd, 1, nchar(wd)) != wd && wd != "/"
+		substr(path_from_wd, 1, nchar(wd)) != wd
 
 		if(substr(path_from_wd, 1, nchar(wd)) != wd && wd != "/") {
 			path <- paste(wd, path_from_wd, sep = "/")
