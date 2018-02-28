@@ -4,7 +4,6 @@
 
 
 dirtoolsEnvironment <- new.env()
-dirtoolsEnvironment$path_to_file <- try(normalizePath(gsub("[~+~]+", " ", sub(".*=", "", commandArgs()[4])), winslash = "/"))
 
 get_this_path <- function() {
 	this_path <- list("dir" = "", "filename" = NA)
@@ -71,6 +70,8 @@ get_this_path <- function() {
 		# if(!(basename(path) %in% list.files(dirname(path)))) {
 		# 	stop()
 		# }
+
+		dirtoolsEnvironment$path_to_file <- try(normalizePath(gsub("[~+~]+", " ", sub(".*=", "", commandArgs()[4])), winslash = "/"))
 
 		path <- dirtoolsEnvironment$path_to_file
 
